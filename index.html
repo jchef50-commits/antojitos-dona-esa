@@ -24,29 +24,52 @@
     </header>
 
     <main class="max-w-4xl mx-auto px-4 mt-8">
-        
         <div id="menu-container" class="space-y-12"></div>
-
     </main>
 
     <div id="cart-bar" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] p-4 transform translate-y-full transition-transform duration-300 z-50">
-        <div class="max-w-4xl mx-auto flex items-center justify-between">
-            <div>
-                <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Tu Pedido</p>
-                <p class="text-xl font-bold text-red-700" id="cart-total">$0.00</p>
+        <div class="max-w-4xl mx-auto space-y-4">
+            <div class="flex items-center justify-between gap-4">
+                <div>
+                    <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Tu Pedido</p>
+                    <p class="text-xl font-bold text-red-700" id="cart-total">$0.00</p>
+                </div>
+                <button onclick="sendWhatsAppOrder()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl flex items-center gap-2 shadow-md transition-all active:scale-95 whitespace-nowrap">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.93 0c3.165.001 6.14 1.233 8.377 3.469 2.236 2.236 3.468 5.211 3.468 8.376 0 6.533-5.348 11.87-11.881 11.87-2.023 0-3.992-.514-5.741-1.489L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.593h.005c5.448 0 9.886-4.434 9.888-9.881.001-2.641-1.027-5.124-2.893-6.99C17.18 3.05 14.698 2.023 12.057 2.022c-5.449 0-9.887 4.434-9.889 9.882-.001 2.225.651 4.391 1.889 6.242l-.999 3.648 3.596-.945zm11.387-5.356c-.304-.152-1.799-.887-2.078-.987-.278-.101-.48-.152-.683.152-.202.304-.784.987-.961 1.19-.177.202-.354.228-.658.076-.304-.152-1.284-.473-2.445-1.508-.903-.805-1.513-1.799-1.69-2.103-.177-.304-.019-.468.133-.62.137-.136.304-.354.456-.532.152-.177.202-.304.304-.506.101-.202.051-.38-.025-.532-.076-.152-.683-1.646-.936-2.254-.246-.592-.497-.511-.683-.52l-.582-.01c-.202 0-.532.076-.81.38-.278.304-1.063 1.038-1.063 2.532 0 1.494 1.089 2.937 1.241 3.139.152.202 2.146 3.277 5.2 4.594.726.313 1.292.5 1.734.64.729.232 1.393.199 1.917.121.585-.087 1.799-.734 2.053-1.443.253-.709.253-1.316.177-1.443-.076-.126-.278-.202-.582-.354z"/></svg>
+                    Pedir por WhatsApp
+                </button>
             </div>
-            <button onclick="sendWhatsAppOrder()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl flex items-center gap-2 shadow-md transition-all active:scale-95">
-                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.93 0c3.165.001 6.14 1.233 8.377 3.469 2.236 2.236 3.468 5.211 3.468 8.376 0 6.533-5.348 11.87-11.881 11.87-2.023 0-3.992-.514-5.741-1.489L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.593h.005c5.448 0 9.886-4.434 9.888-9.881.001-2.641-1.027-5.124-2.893-6.99C17.18 3.05 14.698 2.023 12.057 2.022c-5.449 0-9.887 4.434-9.889 9.882-.001 2.225.651 4.391 1.889 6.242l-.999 3.648 3.596-.945zm11.387-5.356c-.304-.152-1.799-.887-2.078-.987-.278-.101-.48-.152-.683.152-.202.304-.784.987-.961 1.19-.177.202-.354.228-.658.076-.304-.152-1.284-.473-2.445-1.508-.903-.805-1.513-1.799-1.69-2.103-.177-.304-.019-.468.133-.62.137-.136.304-.354.456-.532.152-.177.202-.304.304-.506.101-.202.051-.38-.025-.532-.076-.152-.683-1.646-.936-2.254-.246-.592-.497-.511-.683-.52l-.582-.01c-.202 0-.532.076-.81.38-.278.304-1.063 1.038-1.063 2.532 0 1.494 1.089 2.937 1.241 3.139.152.202 2.146 3.277 5.2 4.594.726.313 1.292.5 1.734.64.729.232 1.393.199 1.917.121.585-.087 1.799-.734 2.053-1.443.253-.709.253-1.316.177-1.443-.076-.126-.278-.202-.582-.354z"/></svg>
-                Pedir por WhatsApp
-            </button>
+
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4">
+                <p class="text-sm font-semibold text-gray-700 mb-3">¿Cómo deseas tu pedido?</p>
+                <div class="grid gap-3 sm:grid-cols-2">
+                    <label class="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3 cursor-pointer hover:border-red-300 transition-colors">
+                        <input type="radio" name="orderType" value="recoger" checked class="accent-red-700" onchange="handleOrderTypeChange()">
+                        <span>
+                            <span class="block font-semibold text-gray-800">Pasar a recoger</span>
+                            <span class="block text-xs text-gray-500">Recoge tu pedido en el local</span>
+                        </span>
+                    </label>
+                    <label class="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3 cursor-pointer hover:border-red-300 transition-colors">
+                        <input type="radio" name="orderType" value="mesa" class="accent-red-700" onchange="handleOrderTypeChange()">
+                        <span>
+                            <span class="block font-semibold text-gray-800">Pedir a mesa</span>
+                            <span class="block text-xs text-gray-500">Te llevamos el pedido a tu mesa</span>
+                        </span>
+                    </label>
+                </div>
+
+                <div id="table-number-container" class="hidden mt-4">
+                    <label for="table-number" class="block text-sm font-semibold text-gray-700 mb-2">Número de mesa</label>
+                    <input id="table-number" type="text" inputmode="numeric" placeholder="Ej. 4" class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-400">
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // CONFIGURACIÓN: Reemplaza con tu número de WhatsApp del negocio (con código de país sin el +)
-        const BUSINESS_PHONE = "529931387656"; 
+        const BUSINESS_PHONE = "529931387656";
 
-        // BASE DE DATOS DEL MENÚ EXACTO DE LA IMAGEN
         const menuData = {
             "Empanadas": [
                 { id: "emp_pollo", name: "Pollo", price: 16 },
@@ -101,10 +124,8 @@
             ]
         };
 
-        // ESTADO DEL CARRITO
         let cart = {};
 
-        // RENDERIZAR MENÚ
         function renderMenu() {
             const container = document.getElementById('menu-container');
             container.innerHTML = '';
@@ -135,14 +156,15 @@
             }
         }
 
-        // ACTUALIZAR CANTIDADES
         function updateQuantity(itemId, change) {
             let itemMeta = null;
-            
-            // Buscar metadata del item
+
             for (const items of Object.values(menuData)) {
                 const found = items.find(i => i.id === itemId);
-                if (found) { itemMeta = found; break; }
+                if (found) {
+                    itemMeta = found;
+                    break;
+                }
             }
 
             if (!itemMeta) return;
@@ -163,7 +185,6 @@
             calculateTotal();
         }
 
-        // CALCULAR TOTAL Y MOSTRAR BARRA FLOTANTE
         function calculateTotal() {
             let total = 0;
             let totalItems = 0;
@@ -183,19 +204,49 @@
             }
         }
 
-        // GENERAR STRING PARA WHATSAPP Y REDIRECCIONAR
+        function handleOrderTypeChange() {
+            const selectedType = document.querySelector('input[name="orderType"]:checked')?.value;
+            const tableContainer = document.getElementById('table-number-container');
+            const tableInput = document.getElementById('table-number');
+
+            if (selectedType === 'mesa') {
+                tableContainer.classList.remove('hidden');
+            } else {
+                tableContainer.classList.add('hidden');
+                tableInput.value = '';
+            }
+        }
+
         function sendWhatsAppOrder() {
+            const items = Object.values(cart);
+            if (items.length === 0) return;
+
+            const selectedType = document.querySelector('input[name="orderType"]:checked')?.value || 'recoger';
+            const tableNumber = document.getElementById('table-number').value.trim();
+
+            if (selectedType === 'mesa' && !tableNumber) {
+                alert('Por favor, escribe el número de mesa antes de enviar tu pedido.');
+                document.getElementById('table-number').focus();
+                return;
+            }
+
             let message = `¡Hola, *Antojitos Doña Esa*! 🤤\nQuiero hacer el siguiente pedido:\n\n`;
             let total = 0;
 
-            for (const item of Object.values(cart)) {
+            for (const item of items) {
                 const subtotal = item.price * item.quantity;
                 message += `• ${item.quantity}x ${item.name} ($${subtotal}.00)\n`;
                 total += subtotal;
             }
 
             message += `\n💰 *Total a cobrar: $${total}.00 MXN*\n`;
-            message += `📍 _Paso a recoger mi pedido al local en Av. Nueva Imagen._`;
+
+            if (selectedType === 'mesa') {
+                message += `🍽️ _Quiero mi pedido para mesa._\n`;
+                message += `🪑 *Mesa: ${tableNumber}*`;
+            } else {
+                message += `📍 _Paso a recoger mi pedido al local en Av. Nueva Imagen._`;
+            }
 
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/${BUSINESS_PHONE}?text=${encodedMessage}`;
@@ -203,8 +254,10 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // Inicializar app
-        window.onload = renderMenu;
+        window.onload = () => {
+            renderMenu();
+            handleOrderTypeChange();
+        };
     </script>
 </body>
 </html>
