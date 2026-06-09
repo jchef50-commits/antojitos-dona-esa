@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antojitos Doña Esa - Menú Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; }
+        .font-title { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-amber-50/40 text-gray-800 min-h-screen pb-32">
+
+    <header class="bg-red-700 text-white text-center py-8 px-4 shadow-md relative border-b-4 border-yellow-500">
+        <h1 class="font-title text-4xl md:text-5xl font-bold tracking-wide">Antojitos Doña Esa</h1>
+        <p class="text-yellow-300 italic mt-2 text-sm md:text-base">"Sabor que enamora, como en casa"</p>
+        <p class="text-xs mt-3 bg-red-800 inline-block px-3 py-1 rounded-full text-gray-200">
+            📍 Av. Nueva Imagen (A un costado de Crepas El Rincón Francés)
+        </p>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 mt-8">
+        
+        <div id="menu-container" class="space-y-12"></div>
+
+    </main>
+
+    <div id="cart-bar" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] p-4 transform translate-y-full transition-transform duration-300 z-50">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div>
+                <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Tu Pedido</p>
+                <p class="text-xl font-bold text-red-700" id="cart-total">$0.00</p>
+            </div>
+            <button onclick="sendWhatsAppOrder()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl flex items-center gap-2 shadow-md transition-all active:scale-95">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.93 0c3.165.001 6.14 1.233 8.377 3.469 2.237 2.235 3.469 5.211 3.469 8.378 0 6.534-5.337 11.882-11.87 11.882-1.994-.001-3.95-.502-5.692-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.747 1.451 5.436 0 9.86-4.413 9.86-9.831 0-2.628-1.023-5.1-2.881-6.958C16.46 1.958 13.998 1.345 11.93 1.345c-5.438 0-9.863 4.414-9.863 9.833-.001 1.658.452 3.275 1.309 4.694l-.989 3.612 3.701-.97c1.42.776 2.98 1.184 4.569 1.186zm10.924-7.625c-.295-.148-1.747-.862-2.019-.961-.272-.099-.471-.148-.669.148-.197.297-.766.961-.94 1.158-.173.199-.347.223-.642.074-.295-.148-1.246-.459-2.375-1.464-.877-.782-1.47-1.749-1.642-2.046-.173-.297-.018-.458.13-.606.134-.133.295-.347.444-.519.149-.173.197-.297.296-.495.1-.198.05-.371-.025-.519-.075-.148-.669-1.609-.916-2.203-.242-.582-.487-.504-.669-.514-.173-.008-.371-.01-.568-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.747-.713 1.994-1.402.247-.688.247-1.277.173-1.402-.073-.124-.272-.198-.567-.347z"/></svg>
+                Pedir por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURACIÓN: Reemplaza con tu número de WhatsApp del negocio (con código de país sin el +)
+        const BUSINESS_PHONE = "52993XXXXXXX"; 
+
+        // BASE DE DATOS DEL MENÚ EXACTO DE LA IMAGEN
+        const menuData = {
+            "Empanadas": [
+                { id: "emp_pollo", name: "Pollo", price: 16 },
+                { id: "emp_res", name: "Res", price: 20 },
+                { id: "emp_frijol", name: "Frijol", price: 16 },
+                { id: "emp_pierna", name: "Pierna", price: 20 },
+                { id: "emp_camaron", name: "Camarón c/ queso", price: 30 },
+                { id: "emp_queso_azucar", name: "Queso c/ azúcar", price: 16 },
+                { id: "emp_queso_hebra", name: "Queso de hebra", price: 16 },
+                { id: "emp_combinada", name: "Combinada", price: 22 }
+            ],
+            "Panuchos": [
+                { id: "pan_pollo", name: "Pollo", price: 20 },
+                { id: "pan_res", name: "Res", price: 24 },
+                { id: "pan_frijol", name: "Frijol", price: 20 },
+                { id: "pan_pierna", name: "Pierna", price: 24 },
+                { id: "pan_queso_hebra", name: "Queso de hebra", price: 20 },
+                { id: "pan_combinada", name: "Combinada", price: 26 }
+            ],
+            "Tostadas": [
+                { id: "tos_pollo", name: "Pollo", price: 18 },
+                { id: "tos_res", name: "Res", price: 20 },
+                { id: "tos_pierna", name: "Pierna", price: 20 }
+            ],
+            "Salbutes": [
+                { id: "sal_pollo", name: "Pollo", price: 20 },
+                { id: "sal_res", name: "Res", price: 24 },
+                { id: "sal_pierna", name: "Pierna", price: 24 }
+            ],
+            "Sándwichs": [
+                { id: "san_jamon", name: "Jamón", price: 40 },
+                { id: "san_pollo", name: "Pollo", price: 50 },
+                { id: "san_pierna", name: "Pierna", price: 55 },
+                { id: "san_club", name: "Club Sándwich", price: 100 }
+            ],
+            "Orden de Platanitos": [
+                { id: "plat_queso_crema", name: "c/ Queso y Crema", price: 30 },
+                { id: "plat_relleno", name: "Plátano Relleno de Queso y Crema", price: 25 }
+            ],
+            "Quesadillas": [
+                { id: "ques_naturales", name: "Naturales (3 pzas)", price: 40 },
+                { id: "ques_jamon", name: "Jamón (3 pzas)", price: 50 },
+                { id: "ques_mix", name: "Jamón c/ pollo o pierna (1 pza)", price: 25 }
+            ],
+            "Huevos al Gusto": [
+                { id: "hue_gusto", name: "Naturales, Mexicana, Jamón o Longaniza", price: 75 },
+                { id: "hue_omelet", name: "Omelet c/ jamón y queso", price: 90 }
+            ],
+            "Bebidas": [
+                { id: "beb_aguas", name: "Aguas frescas 1/2 litro", price: 25 },
+                { id: "beb_refresco", name: "Refresco embotellado", price: 25 }
+            ]
+        };
+
+        // ESTADO DEL CARRITO
+        let cart = {};
+
+        // RENDERIZAR MENÚ
+        function renderMenu() {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = '';
+
+            for (const [category, items] of Object.entries(menuData)) {
+                const categorySection = document.createElement('section');
+                categorySection.className = 'bg-white rounded-2xl p-6 shadow-sm border border-amber-100';
+                
+                categorySection.innerHTML = `
+                    <h2 class="font-title text-2xl font-bold text-red-700 mb-4 border-b pb-2 border-yellow-500/30">${category}</h2>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        ${items.map(item => `
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-amber-50/30 hover:bg-amber-50/70 transition-colors">
+                                <div class="pr-2">
+                                    <h3 class="font-semibold text-gray-800">${item.name}</h3>
+                                    <p class="text-sm font-bold text-yellow-600">$${item.price}.00</p>
+                                </div>
+                                <div class="flex items-center gap-3 bg-white border border-gray-200 rounded-lg p-1 shadow-sm">
+                                    <button onclick="updateQuantity('${item.id}', -1)" class="w-8 h-8 rounded-md bg-gray-100 hover:bg-red-100 hover:text-red-600 font-bold flex items-center justify-center transition-colors text-lg">-</button>
+                                    <span id="qty-${item.id}" class="w-6 text-center font-bold text-sm">0</span>
+                                    <button onclick="updateQuantity('${item.id}', 1)" class="w-8 h-8 rounded-md bg-gray-100 hover:bg-green-100 hover:text-green-600 font-bold flex items-center justify-center transition-colors text-lg">+</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(categorySection);
+            }
+        }
+
+        // ACTUALIZAR CANTIDADES
+        function updateQuantity(itemId, change) {
+            let itemMeta = null;
+            
+            // Buscar metadata del item
+            for (const items of Object.values(menuData)) {
+                const found = items.find(i => i.id === itemId);
+                if (found) { itemMeta = found; break; }
+            }
+
+            if (!itemMeta) return;
+
+            if (!cart[itemId]) {
+                cart[itemId] = { ...itemMeta, quantity: 0 };
+            }
+
+            cart[itemId].quantity += change;
+
+            if (cart[itemId].quantity <= 0) {
+                delete cart[itemId];
+                document.getElementById(`qty-${itemId}`).innerText = 0;
+            } else {
+                document.getElementById(`qty-${itemId}`).innerText = cart[itemId].quantity;
+            }
+
+            calculateTotal();
+        }
+
+        // CALCULAR TOTAL Y MOSTRAR BARRA FLOTANTE
+        function calculateTotal() {
+            let total = 0;
+            let totalItems = 0;
+
+            for (const item of Object.values(cart)) {
+                total += item.price * item.quantity;
+                totalItems += item.quantity;
+            }
+
+            document.getElementById('cart-total').innerText = `$${total}.00 MXN`;
+
+            const cartBar = document.getElementById('cart-bar');
+            if (totalItems > 0) {
+                cartBar.classList.remove('translate-y-full');
+            } else {
+                cartBar.classList.add('translate-y-full');
+            }
+        }
+
+        // GENERAR STRING PARA WHATSAPP Y REDIRECCIONAR
+        function sendWhatsAppOrder() {
+            let message = `¡Hola, *Antojitos Doña Esa*! 🤤\nQuiero hacer el siguiente pedido:\n\n`;
+            let total = 0;
+
+            for (const item of Object.values(cart)) {
+                const subtotal = item.price * item.quantity;
+                message += `• ${item.quantity}x ${item.name} ($${subtotal}.00)\n`;
+                total += subtotal;
+            }
+
+            message += `\n💰 *Total a cobrar: $${total}.00 MXN*\n`;
+            message += `📍 _Paso a recoger mi pedido al local en Av. Nueva Imagen._`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${BUSINESS_PHONE}?text=${encodedMessage}`;
+
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Inicializar app
+        window.onload = renderMenu;
+    </script>
+</body>
+</html>
