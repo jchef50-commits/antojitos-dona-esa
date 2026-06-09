@@ -36,7 +36,7 @@
                 <p class="text-xl font-bold text-red-700" id="cart-total">$0.00</p>
             </div>
             <button onclick="sendWhatsAppOrder()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl flex items-center gap-2 shadow-md transition-all active:scale-95">
-                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.93 0c3.165.001 6.14 1.233 8.377 3.469 2.237 2.235 3.469 5.211 3.469 8.378 0 6.534-5.337 11.882-11.87 11.882-1.994-.001-3.95-.502-5.692-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.747 1.451 5.436 0 9.86-4.413 9.86-9.831 0-2.628-1.023-5.1-2.881-6.958C16.46 1.958 13.998 1.345 11.93 1.345c-5.438 0-9.863 4.414-9.863 9.833-.001 1.658.452 3.275 1.309 4.694l-.989 3.612 3.701-.97c1.42.776 2.98 1.184 4.569 1.186zm10.924-7.625c-.295-.148-1.747-.862-2.019-.961-.272-.099-.471-.148-.669.148-.197.297-.766.961-.94 1.158-.173.199-.347.223-.642.074-.295-.148-1.246-.459-2.375-1.464-.877-.782-1.47-1.749-1.642-2.046-.173-.297-.018-.458.13-.606.134-.133.295-.347.444-.519.149-.173.197-.297.296-.495.1-.198.05-.371-.025-.519-.075-.148-.669-1.609-.916-2.203-.242-.582-.487-.504-.669-.514-.173-.008-.371-.01-.568-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.747-.713 1.994-1.402.247-.688.247-1.277.173-1.402-.073-.124-.272-.198-.567-.347z"/></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.93 0c3.165.001 6.14 1.233 8.377 3.469 2.236 2.236 3.468 5.211 3.468 8.376 0 6.533-5.348 11.87-11.881 11.87-2.023 0-3.992-.514-5.741-1.489L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.593h.005c5.448 0 9.886-4.434 9.888-9.881.001-2.641-1.027-5.124-2.893-6.99C17.18 3.05 14.698 2.023 12.057 2.022c-5.449 0-9.887 4.434-9.889 9.882-.001 2.225.651 4.391 1.889 6.242l-.999 3.648 3.596-.945zm11.387-5.356c-.304-.152-1.799-.887-2.078-.987-.278-.101-.48-.152-.683.152-.202.304-.784.987-.961 1.19-.177.202-.354.228-.658.076-.304-.152-1.284-.473-2.445-1.508-.903-.805-1.513-1.799-1.69-2.103-.177-.304-.019-.468.133-.62.137-.136.304-.354.456-.532.152-.177.202-.304.304-.506.101-.202.051-.38-.025-.532-.076-.152-.683-1.646-.936-2.254-.246-.592-.497-.511-.683-.52l-.582-.01c-.202 0-.532.076-.81.38-.278.304-1.063 1.038-1.063 2.532 0 1.494 1.089 2.937 1.241 3.139.152.202 2.146 3.277 5.2 4.594.726.313 1.292.5 1.734.64.729.232 1.393.199 1.917.121.585-.087 1.799-.734 2.053-1.443.253-.709.253-1.316.177-1.443-.076-.126-.278-.202-.582-.354z"/></svg>
                 Pedir por WhatsApp
             </button>
         </div>
@@ -44,7 +44,7 @@
 
     <script>
         // CONFIGURACIÓN: Reemplaza con tu número de WhatsApp del negocio (con código de país sin el +)
-        const BUSINESS_PHONE = "52993XXXXXXX"; 
+        const BUSINESS_PHONE = "529931387656"; 
 
         // BASE DE DATOS DEL MENÚ EXACTO DE LA IMAGEN
         const menuData = {
@@ -123,9 +123,9 @@
                                     <p class="text-sm font-bold text-yellow-600">$${item.price}.00</p>
                                 </div>
                                 <div class="flex items-center gap-3 bg-white border border-gray-200 rounded-lg p-1 shadow-sm">
-                                    <button onclick="updateQuantity('${item.id}', -1)" class="w-8 h-8 rounded-md bg-gray-100 hover:bg-red-100 hover:text-red-600 font-bold flex items-center justify-center transition-colors text-lg">-</button>
+                                    <button onclick="updateQuantity('${item.id}', -1)" class="w-8 h-8 rounded-md bg-gray-100 hover:bg-red-100 hover:text-red-600 font-bold flex items-center justify-center transition-colors">-</button>
                                     <span id="qty-${item.id}" class="w-6 text-center font-bold text-sm">0</span>
-                                    <button onclick="updateQuantity('${item.id}', 1)" class="w-8 h-8 rounded-md bg-gray-100 hover:bg-green-100 hover:text-green-600 font-bold flex items-center justify-center transition-colors text-lg">+</button>
+                                    <button onclick="updateQuantity('${item.id}', 1)" class="w-8 h-8 rounded-md bg-gray-100 hover:bg-green-100 hover:text-green-600 font-bold flex items-center justify-center transition-colors">+</button>
                                 </div>
                             </div>
                         `).join('')}
